@@ -1,27 +1,13 @@
----
-apiVersion: source.toolkit.fluxcd.io/v1beta1
-kind: GitRepository
-metadata:
-  name: apps-repo
-  namespace: rmz
-spec:
-  interval: 1m0s
-  ref:
-    branch: main
-  secretRef:
-    name: apps-repo
-  url: ssh://git@github.com/ut0mt8/gitops/
----
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
 metadata:
-  name: rmz-ns
-  namespace: rmz
+  name: rmz-ns-sync
+  namespace: flux-system
 spec:
   interval: 10m0s
   path: ./apps/
   prune: true
   sourceRef:
     kind: GitRepository
-    name: apps-repo
+	name: flux-system
   validation: client
