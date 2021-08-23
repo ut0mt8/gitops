@@ -19,7 +19,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./clusters/rmz-cluster/flux-system
+  path: ./clusters/rmz-cluster/
   prune: true
   sourceRef:
     kind: GitRepository
