@@ -1,3 +1,17 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: apps-repo
+  namespace: apps-repo
+spec:
+  interval: 1m0s
+  ref:
+    branch: main
+  secretRef:
+    name: apps-repo
+  url: ssh://git@github.com/ut0mt8/gitops/
+---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
 metadata:
@@ -9,5 +23,5 @@ spec:
   prune: true
   sourceRef:
     kind: GitRepository
-    name: flux-system
+    name: apps-repo
   validation: client
