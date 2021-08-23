@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo
+  labels:
+    app: echo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: echo
+  template:
+    metadata:
+      labels:
+        app: echo
+    spec:
+      volumes:
+      - name: echo
+        configMap:
+          name: echo
+      containers:
+      - name: nginx
+        image: nginx:1.15
+        command: [ "nginx" ]
+        args: [ "-g", "daemon off;", "-c", "/etc/config/nginx.conf" ]
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: healthcheck
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: healthcheck
+        ports:
+        - containerPort: 1111
+          name: http
+        - containerPort: 2222
+          name: healthcheck
+        volumeMounts:
+        - name: echo
+          mountPath: /etc/config
+      - image: gcr.io/kubernetes-e2e-test-images/echoserver:2.2
+        name: echo
+        ports:
+        - containerPort: 8080
+        env:
+          - name: NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: POD_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
