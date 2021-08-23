@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: echo
+  namespace: rmz
+data:
+  nginx.conf: |
+    user  nginx;
+    worker_processes  1;
+
+    error_log  /var/log/nginx/error.log warn;
+    pid        /var/run/nginx.pid;
+
+    events {
+        worker_connections  1024;
+    }
+
+    http {
+        server {
+            listen       1111;
+            server_name  localhost;
+
+            location /foo {
+                proxy_pass http://echo2.demo;
+            }
+        }
+
+        server {
+            listen       2222;
+            server_name  localhost;
+
+            location /app {
+                proxy_pass http://nginx-ext.demo:8000;
+            }
+
+            location /healthz {
+                return 200;
+            }
+        }
+    }
