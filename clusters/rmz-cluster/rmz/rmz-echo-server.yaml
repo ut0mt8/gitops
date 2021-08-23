@@ -7,6 +7,7 @@ spec:
   interval: 10m0s
   path: ./apps/echo-server/
   prune: true
+  targetNamespace: rmz
   sourceRef:
     kind: GitRepository
     name: flux-system
