@@ -5,5 +5,7 @@ commonAnnotations:
 
 bases:
 - ../../../base/infoapi
-- deployment-patch.yaml
 - sealed-secret.yaml
+
+patchesStrategicMerge:
+- deployment-patch.yaml
