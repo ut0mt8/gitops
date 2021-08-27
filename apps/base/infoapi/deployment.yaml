@@ -30,9 +30,6 @@ spec:
         - ./podinfo
         - --port=9898
         - --level=info
-        env:
-        - name: PODINFO_UI_COLOR
-          value: "#34577c"
         resources:
           limits:
             cpu: 2000m
