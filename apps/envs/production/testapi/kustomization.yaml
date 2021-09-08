@@ -15,4 +15,12 @@ bases:
 patchesStrategicMerge:
 - deployment-patch.yaml
 
+patches:
+- target:
+    kind: Deployment
+  patch: |-
+    - op: replace
+      path: /metadata/name
+      value: testapi
+
 
