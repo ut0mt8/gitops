@@ -1,6 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: infoapi
+  name: testapi
 spec:
   replicas: 2
