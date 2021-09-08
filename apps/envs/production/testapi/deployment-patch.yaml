@@ -1,6 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: testapi
+  name: infoapi
 spec:
-  replicas: 2
+  replicas: 3
+  selector:
+    matchLabels:
+      app: testapi
+  template:
+    metadata:
+      labels:
+        app: testapi
+    spec:
+      containers:
+      - name: testapi
