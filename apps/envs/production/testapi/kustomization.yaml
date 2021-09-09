@@ -10,10 +10,12 @@ commonAnnotations:
 commonLabels:
   application: testapi
 
-bases:
+resources:
 - ../../../base/api
 - sealed-secret.yaml
 
-patchesStrategicMerge:
-- deployment-patch.yaml
-
+replicas:
+- name: api-worker
+  count: 3
+- name: api-receiver
+  count: 2
