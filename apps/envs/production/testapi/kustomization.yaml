@@ -1,12 +1,11 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: rmz2
 namePrefix: test-
+namespace: rmz2
 
 commonAnnotations:
   environment: production
-
 commonLabels:
   application: testapi
 
@@ -14,8 +13,19 @@ resources:
 - ../../../base/api
 - sealed-secret.yaml
 
+patches:
+- target:
+    kind: Deployment
+  patch: |-
+    - op: replace
+      path: /spec/template/spec/volumes
+      value:
+      - name: config
+        secret:
+          secretName: test-api-secret
+
 replicas:
-- name: api-worker
-  count: 3
-- name: api-receiver
-  count: 2
+- count: 3
+  name: api-worker
+- count: 2
+  name: api-receiver
