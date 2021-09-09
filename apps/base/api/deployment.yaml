@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: infoapi
+  name: api
 spec:
   selector:
     matchLabels:
-      app: infoapi
+      app: api
   template:
     metadata:
       labels:
-        app: infoapi
+        app: api
     spec:
       volumes:
       - name: config
         secret:
           secretName: mysecret
       containers:
-      - name: infoapi
+      - name: api
         image: ghcr.io/stefanprodan/podinfo:6.0.0
         imagePullPolicy: IfNotPresent
         volumeMounts:
