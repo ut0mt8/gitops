@@ -1,6 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
- name: infoapi
+  name: api-receiver
 spec:
   replicas: 3

@@ -2,25 +2,18 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 namespace: rmz2
+namePrefix: test-
+
 commonAnnotations:
   environment: production
 
-commonLabels:
-   app: testapi
+#commonLabels:
+#app: testapi
 
 bases:
-- ../../../base/infoapi
+- ../../../base/api
 - sealed-secret.yaml
 
 patchesStrategicMerge:
 - deployment-patch.yaml
-
-patches:
-- target:
-    kind: Deployment
-  patch: |-
-    - op: replace
-      path: /metadata/name
-      value: testapi
-
 
