@@ -13,4 +13,11 @@ spec:
   source:
     path: ./apps/envs/production/testapi/
     repoURL: 'https://github.com/ut0mt8/gitops.git'
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+
+
 
