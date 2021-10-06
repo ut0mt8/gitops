@@ -25,7 +25,7 @@ patches:
           secretName: test-api-secret
 
 replicas:
-- count: 3
+- count: 1
   name: api-worker
 - count: 2
   name: api-receiver
