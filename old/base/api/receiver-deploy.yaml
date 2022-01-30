@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-receiver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-receiver
+  template:
+    metadata:
+      labels:
+        app: api-receiver
+    spec:
+      volumes:
+      - name: config
+        secret:
+          secretName: api-secret
+      containers:
+      - name: api-receiver
+        image: ghcr.io/stefanprodan/podinfo:6.0.0
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: config
+          mountPath: "/config"
+        ports:
+        - name: http
+          containerPort: 9898
+          protocol: TCP
+        command:
+        - ./podinfo
+        - --port=9898
+        - --level=info
+        resources:
+          limits:
+            cpu: 2000m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 64Mi
