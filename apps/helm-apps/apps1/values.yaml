@@ -1,2 +1,3 @@
-# replicaCount -- Pod replicas
-replicaCount: 2
+test-nginx:
+  controller:
+    replicaCount: 2
