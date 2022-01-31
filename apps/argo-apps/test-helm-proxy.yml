@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test-helm-proxy
+  namespace: argocd
+spec:
+  destination:
+    namespace: falcon
+    name: in-cluster
+  project: falcon
+  source:
+    path: ./apps/helm-apps/apps1/
+    repoURL: https://github.com/ut0mt8/gitops.git
+    helm:
+      valueFiles: 
+       - values.yaml
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
