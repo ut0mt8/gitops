@@ -7,7 +7,6 @@ spec:
   destination:
     namespace: falcon
     name: in-cluster
-    namespace: rmz2
   project: default
   source:
     path: ./apps/helm-apps/apps1/
