@@ -7,7 +7,7 @@ spec:
   destination:
     namespace: falcon
     name: in-cluster
-  project: default
+  project: falcon
   syncPolicy:
     automated:
       prune: true

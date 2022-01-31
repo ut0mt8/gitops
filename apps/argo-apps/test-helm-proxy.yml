@@ -7,7 +7,7 @@ spec:
   destination:
     namespace: falcon
     name: in-cluster
-  project: default
+  project: falcon
   source:
     path: ./apps/helm-apps/apps1/
     repoURL: https://github.com/ut0mt8/gitops.git

@@ -7,7 +7,7 @@ spec:
   destination:
     name: in-cluster
     namespace: falcon
-  project: default
+  project: falcon
   source:
     directory:
       recurse: true
