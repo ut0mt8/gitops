@@ -1,3 +1,2 @@
-ingress-nginx:
-  controller:
-    replicaCount: 2
+echo-server:
+  replicaCount: 2
