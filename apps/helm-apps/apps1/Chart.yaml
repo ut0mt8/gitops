@@ -1,11 +1,6 @@
 apiVersion: v2
 name: test-echo
-description: OTS echo server charts
-
-type: application
 version: 1.0.0
-appVersion: 1.0.0
-
 dependencies:
 - name: echo-server 
   version: 0.3.1
