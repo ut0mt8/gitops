@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: appset-gen
+  namespace: argocd
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/ut0mt8/gitops/
+      revision: HEAD
+      directories:
+      - path: apps/helm-apps/*
+  template:
+    metadata:
+      name: '{{path.basename}}'
+    spec:
+      project: falcon
+      source:
+        repoURL: https://github.com/ut0mt8/gitops/
+        targetRevision: HEAD
+        path: 'xxx/{{path}}'
+      destination:
+        name: in-cluster
+        namespace: falcon
