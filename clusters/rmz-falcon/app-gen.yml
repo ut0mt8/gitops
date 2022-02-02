@@ -13,12 +13,22 @@ spec:
   template:
     metadata:
       name: '{{path.basename}}'
+      namespace: argocd
+      finalizers:
+       - resources-finalizer.argocd.argoproj.io
     spec:
       project: falcon
       source:
         repoURL: https://github.com/ut0mt8/gitops/
         targetRevision: HEAD
-        path: 'xxx/{{path}}'
+        path: '{{path}}'
+        helm:
+          valueFiles:
+           - values.yaml
       destination:
         name: in-cluster
         namespace: falcon
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
